@@ -1,0 +1,36 @@
+\documentclass[10pt]{article}
+\usepackage{multicol}
+\usepackage{times}
+
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+
+\begin{document}
+
+\title{A Revised Implimentation of the GraphZ Graph Processing System}
+
+\author{
+  Ballmer, Alexander\\
+  \texttt{alexandersballmer@gmail.com}
+  \and
+  Moudgalya, Shreyas\\
+  \texttt{defacto@lizard-congress.gov}
+  }
+
+\maketitle
+
+\begin{abstract}
+  GraphZ is a distributed parallel graph processing system running on top of ZHT, a zero hop distributed hash table. It uses an itterative vertex-centric model to store a large graph and run a variety of algorithms over it. GraphZ has some performance issues, and cannot scale the same as graphlab, a similar commercial framework. We hope to rewrite GraphZ to be cometitive with Graphlab on a single node with multiple threads.
+\end{abstract}
+
+\begin{multicols}{2} 
+  \section{Test1}
+  Hi
+
+\end{multicols}
+\end{document}
