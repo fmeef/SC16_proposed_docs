@@ -30,6 +30,10 @@
 
 \begin{multicols}{2} 
   \section{Background}
+  GRAPH/Z was based off of a graph processing paradigm called Pregel. Pregel uses a model centered around the vertexes of the graph. Each vertex has an update function that is run in the vertex's context in the graph. The update function allows the vertex to modify its edges, perform calculations, and send messages to other vertexes. The computation occurs in iterations called supersteps, with each iteration calling every vertex's update function theoretically in parallel. Even if there are fewer threads than vertexes, all of the update functions behave as if they are called in parallel.\\
+  Messages sent by vertexes are used to communicate between vertexes, sending data to the next iteration. At each iteration, vertexes can vote to halt and disable themselves. A halted vertex can be re-enabled by receiving a message. If all the vertexes are disabled at the start of an iteration, the entire system halts and returns.\\
+  GRAPH/Z adapts the Pregel model, but adds the concept of a distributed hash table. The hash table stores both the graph's edges and vertexes, and also provides a platform for running the distributed message queue. The hash table serves as the only means of communication between nodes. The hash table used is ZHT, a DHT implementation that is fault-tolerant and can scale to 32000 cores. ZHT abstracts away the physical hardware, exposing only a key-value store. 
+  
   \section{Problem}
   \section{Related Work}
   \section{Proposed Solution}
