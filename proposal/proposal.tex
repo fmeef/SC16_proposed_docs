@@ -36,6 +36,9 @@
   \section{Problem}
   GRAPH/Z has experienced problems in terms of scaling competitivly with commercial software like Graphlab. The exact cause of the problem is still unknown, but seems to be related to the way that ZHT deals with data locality between nodes. ZHT's hashing function does not distiguish between local data on one node and remote data on a network node in the cluster. This could lead to data being ineficciantly stored, needing high latency network access to retrieve it from a remote node. The hashing function also may result in some computational overhead. 
   \section{Related Work}
+  The closes related system to GRAPH/Z is Pregel, which it was inspired by. In most of our work, however, we compare GRAPH/Z to Graphlab, which is another high performance graph processing framework. Graphlab uses a similar paradigm to GRAPH/Z, but allows a vertex to access data that is not in a message to the vertex. \\
+  Another less similar but still relevant work is Hadoop, which follows the MapReduce paradigm. Hadoop is frequently used to process large graphs. In fact, GRAPH/Z and Pregel computations can be expressed as a series of chained MapReduce functions. Hadoop has largely been replaced by Apache Spark, which is faster in some cases.  
+  
   \section{Proposed Solution}
   \section{Evalution}
   \section{Timeline}
