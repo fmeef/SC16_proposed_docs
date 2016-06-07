@@ -14,6 +14,13 @@
 
 \begin{document}
 \nocite{Gz:5}
+\nocite{Gz:6}
+\nocite{Gz:7}
+\nocite{Gz:8}
+\nocite{Gz:9}
+\nocite{Gz:10}
+\nocite{Gz:11}
+\nocite{Gz:12}
 \title{A Revised Implementation of the GRAPH/Z Graph Processing System}
 
 \author{
@@ -73,8 +80,7 @@
   We will produce a poster outlining the new GRAPH/Z's strengths and weaknesses and highlighting the changes that we made from the original project. The poster will also include the abstract and writeup needed for entering it into the Supercomputing conference.  Deliverables will also include the finished GRAPH/Z processing system and information comparing it to GraphLab and other existing similar tools. Included on the poster will be data from profiling and traces of the pagerank algorithm and the newly proposed partitioning algorithm on a single node on an instance of AWS EC2 using the dataset from Stanford Network Analysis Project.
   
    \section{Conclusion}
-   The original GRAPH/Z was underperforming compared to most other productions graph processing systems. We hope that rewriting it from scratch for a single node will help us pinpoint the cause of the lack of performance. In order to determine if the ZHT distributed hash table is an IO bottleneck, we will confine our implementation to a single node, and use an alternate backend besides ZHT. By using the newly proposed partitioning and pagerank algorithm on GRAPH/Z, we hope to measure better performance of the GRAPH/Z system. 
-
+   The original GRAPH/Z was underperforming compared to most other productions graph processing systems. We hope that rewriting it from scratch for a single node will help us pinpoint the cause of the lack of performance. In order to determine if the ZHT distributed hash table is an IO bottleneck, we will confine our implementation to a single node, and use an alternate backend besides ZHT. By using the newly proposed partitioning and pagerank algorithm on GRAPH/Z, we hope to measure better performance of the GRAPH/Z system.
    \bibliographystyle{plain}
    \bibliography{cite}
 \end{multicols}
