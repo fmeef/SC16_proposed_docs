@@ -21,7 +21,7 @@
   \and
   Moudgalya, Shreyas\\
   \texttt{smoudgal@hawk.iit.edu}
-  }
+}
 
 \maketitle
 
@@ -41,7 +41,7 @@
   Another less similar but still relevant work is Hadoop, which follows the MapReduce paradigm. Hadoop is frequently used to process large graphs. In fact, GRAPH/Z and Pregel computations can be expressed as a series of chained MapReduce functions. \cite{Gz:4}  Hadoop has largely been replaced by Apache Spark, which is faster in some cases.    
   \section{Proposed Solution}
   Our main work to solve our problems of scalability is to backtrack and try to achieve good scaling on a single node, instead of strong scaling across multiple nodes. We believe that the problem with GRAPH/Z lies within the 'crosstalk' when restoring key/value pairs stored on a remote node, as ZHT has bad data locality. Our main goal is to achieve some level of competitiveness against GraphLab on a single node, and to lay down a framework to expand to multi-node scaling through ZHT or another distributed datastore. We will base performance off of runtime, weak scaling with larger datasets, and profiling tools such as valgrind/callgrind.
-  \section{Evalution}
+  \section{Evaluation}
   As the main goal for rewriting GRAPH/Z is performance on a single node, we will be using profiling tools such as valgrind and callgrind, along with basic runtime measurement, to measure the efficiency and speed of GRAPH/Z in relation to Graphlab. We will be using a modified pagerank algorithm designed for the Pregel paradigm as our test case. While profiling at a function call level will help us achieve our goal, the metrics used to determine success will be overall runtime and memory use. Scaling will be determined on multiple cores, and increasing data size, but on a single node.  These metrics will be used for the eventual later goal of scaling to more than one node.
 \end{multicols}
 
@@ -52,7 +52,6 @@
    The main component of the deliverables will be a poster outlining the new GRAPH/Z's strengths and weaknesses and highlighting the changes that we made from the original project. The poster will also include the abstract and writeup needed for entering it into the Supercomputing conference.  Deliverables will also include the finished GRAPH/Z processing system and information comparing it to GraphLab and other existing similar tools. Also included with be data from profiling and traces. 
    \section{Conclusion}
    The original GRAPH/Z was underperforming compared to most other productions graph processing systems. We hope by rewriting it from scratch with a new backend storage system we will discover what may be the cause of the lack of performance. In order to determine if the ZHT distributed hash table is an IO bottleneck, we will confine our implementation to a single node, and use an alternate backend besides ZHT.
-
 
    \bibliographystyle{plain}
    \bibliography{cite}
