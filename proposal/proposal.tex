@@ -37,8 +37,8 @@
   \section{Problem}
   GRAPH/Z has experienced problems in terms of scaling competitively with commercial software like Graphlab because of the way that ZHT deals with data locality between nodes. ZHT's hashing function does not exploit data locality on one node. \cite{Gz:3} This can cause high network usage and slowdown. 
   \section{Related Work}
-  The closes related system to GRAPH/Z is Pregel, which it was inspired by. In most of our work, however, we compare GRAPH/Z to Graphlab, which is another high performance graph processing framework. Graphlab uses a similar paradigm to GRAPH/Z, but allows a vertex to access data that is not in a message to the vertex. \cite{Gz:4} \\
-  Another less similar but still relevant work is Hadoop, which follows the MapReduce paradigm. Hadoop is frequently used to process large graphs. In fact, GRAPH/Z and Pregel computations can be expressed as a series of chained MapReduce functions. \cite{Gz:4}  Hadoop has largely been replaced by Apache Spark, which is faster in some cases.    
+  The closes related system to GRAPH/Z is Pregel. In most of our work, however, we compare GRAPH/Z to Graphlab, which is another high performance graph processing framework. Graphlab uses a similar paradigm to GRAPH/Z, but allows a vertex to access data that is not in a message to the vertex. \cite{Gz:4} \\
+  Another less similar but still relevant work is Hadoop, which follows the MapReduce paradigm. GRAPH/Z and Pregel computations can be expressed as a series of chained MapReduce functions. \cite{Gz:4}
   \section{Proposed Solution}
   Our main work to solve our problems of scalability is to backtrack and try to achieve good scaling on a single node. We believe that the problem with GRAPH/Z lies in bad data locality with ZHT. Our main goal is to achieve some level of competitiveness against GraphLab on a single node, eventually expanding to multi-node scaling through ZHT or another distributed datastore. We will measure performance from weak scaling with larger datasets, and profiling tools such as valgrind/callgrind.
   \section{Evaluation}
