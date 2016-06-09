@@ -43,7 +43,6 @@
   GRAPH/Z adds a distributed hash table to the Pregel model. The hash table stores the graph, and a distributed message queue that serves as the means of sending messages to the next iteration. The hash table used by GRAPH/Z is ZHT, a DHT implementation that is fault-tolerant and can scale to 32000 cores.\cite{Gz:2}
   
   \section{Problem}
-  \subsection{Scaling of GRAPHZ/Z}
   GRAPH/Z has experienced problems in terms of scaling competitively with commercial software like Graphlab because of the way that ZHT deals with data locality between nodes. ZHT's hashing function does not exploit data locality on one node.\cite{Gz:3} This can cause high network usage and slowdown.
   \section{Related Work}
   \subsection{Pregel}
