@@ -21,7 +21,7 @@
 \nocite{Gz:10}
 \nocite{Gz:11}
 \nocite{Gz:12}
-\title{A Revised Implementation of the GRAPH/Z Graph Processing System}
+\title{A revised implementation of Lazy-K partitioning algorithm for Graph/z}
 
 \author{
   Moudgalya, Shreyas\\
@@ -66,7 +66,16 @@
   \end{enumerate}
   
   \section{Evaluation}
-  Profiling and comprehensive performance evaluation of the different data sets on the newly implemented graph partitioning algorithm in order to compare its edge cuts, load balancing with other partitioning algorithms such as the Dynamic Cut-Cluster Algorithm, EvoPartition Algorithm, and the Kernighan–Lin Algorithm. We would also profile the running time of the different algorithms along with the newly implemented partitioning algorithm based on increase in graph vertices and increase in graph edges.
+  Profiling and comprehensive performance evaluation of the different data sets on the newly implemented graph partitioning algorithm in order to compare its edge cuts, load balancing with other partitioning algorithms such as the Dynamic Cut-Cluster Algorithm, EvoPartition Algorithm, and the Kernighan–Lin Algorithm. We would also profile the running time of the different algorithms along with the newly implemented partitioning algorithm based on increase in graph vertices and increase in graph edges.\\
+  We will use a graph partitioning algorithm defined as:\\
+  Given a graph $G = (V,E)$ and a a set of partitions, $P$, an output partition $V = v_0 \cup V_1 \cup V_2 \cup \ldots \cup V_{p-1}$ such that
+  \begin{enumerate}
+  \item ${V_i}$ are disjoint $\Rightarrow V_i \cap V_i = \emptyset$
+  \item ${V_i}$ are roughly balanced $\Rightarrow |V_i| ~ |V_i|$
+  \item let $E_{cut} \equiv {(u,v) | u \in V_i, v \in V_i, i \neq j}$\\
+    Minimize $|E_{cut}|$
+  \end{enumerate}
+
 
 
   \section{Timeline with Weekly Goals}
