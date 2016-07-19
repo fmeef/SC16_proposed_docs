@@ -85,7 +85,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{A Pregel Based MultiThread Graph Processing Library}
+\title{Implimenting A Pregel Based Multithreaded Graph Processing Library}
 \subtitle{[Extended Abstract]}
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -147,11 +147,7 @@
 
 \maketitle
 \begin{abstract}
-  The emerging applications in big data science and social networks has led to the development of several graph-parallel abstractions including GRAPH/Z. GRAPH/Z is a distributed parallel graph processing system running on top of ZHT, a zero hop distributed hash table. It uses an iterative vertex-centric model to store a large graph and run a variety of algorithms over it. GRAPH/Z has some performance issues, and cannot scale the same as Graphlab, a similar commercial framework. We hope to rewrite GRAPH/Z to be competitive with the commercial framework, Graphlab on a single node with multiple threads.  In the previous implementation GRAPH/Z used ZHT, a scalable distributed key-value store as building block. ZHT has very poor data locality, which can create performance issues.
-
-
-  The emerging applications in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale to 
-
+  The emerging applications in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale to large core counts and accross many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some newer systems make use of shared memory and larger core counts. I hope to explore ways to utilize these larger shared memory systems by implementing a framework for manipulating graphs at a large scale. This system should be able to leverage and scale to very large core counts and provide a framework for later incorporating distributed processing across multiple nodes.   
 
 \end{abstract}
 
