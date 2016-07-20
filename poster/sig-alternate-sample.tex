@@ -183,7 +183,7 @@
 \justify
 I propose a graph processing application, FemtoGraph, which will use a vertex-centric approach. This approach involves calling a function in the context of a vertex for each and every vertex. This function can modify or read from edges and other vertices.  Computation occurs in intervals or steps, with some form of communication between steps. Vertex-centric algorithms can be either synchronous, meaning every vertex function must finish before the next step begins, or asynchronous, which means that the next step can begin in the context of one vertex immediately.  \cite{Gz:7}
 
-FemtoGraph is based off of the pregel model. Pregel is a vertex-centric graph processing model. Pregel is synchronous, with computation occurring in steps called supersteps. There is a messaging system for sending data and state to vertices in the next superstep, but not to any vertex in the current superstep. Vertices can do computations, modify neighbor vertices and edges, send messages to vertices in the next superstep, and vote to halt. A vertex that has voted to halt cannot run its compute function until it receives a message or all vertices have voted to halt. When all vertices have voted to halt, the simulation ends. \cite{Gz:4}
+FemtoGraph is based off of the pregel model. Pregel is a vertex-centric graph processing model. Pregel is synchronous, with computation occurring in steps called supersteps. There is a messaging system for sending data and state to vertices in the next superstep, but not to any vertex in the current superstep. Vertices can do computations, modify neighbor vertices and edges, send messages to vertices in the next superstep, and vote to halt, meaning it cannot run its compute function until it receives a message or all vertices have voted to halt. When all vertices have voted to halt, the simulation ends. \cite{Gz:4}
 
 \section{Related Work}
 \justify
@@ -192,7 +192,7 @@ One of the main similar applications in this area is GraphLab. GraphLab is anoth
 
 \section{Implementation}
 \justify
-FemtoGraph is implemented in C++ using parts of the Boost C++ library. There are 3 main parts. Vertex storage, the message queue, and the compute function. Vertex storage also stores edges and uses  an adjacency list using C++ vectors. The message queue is implemented using boost lockless queues, one for each vertex. The compute function is a user defined function that is run in the context of each vertex during a pregel superstep. Update functions are called in parallel with a user defined number of threads. The message queue follows a producer-consumer model where the compute functions of the previous superstep generate messages that are consumed by the compute function of the current superstep.
+FemtoGraph is implemented in C++ using parts of the Boost C++ library. There are 3 main parts. Vertex storage, the message queue, and the compute function. Vertex storage also stores edges and uses  an adjacency list using C++ vectors. The message queue is implemented using boost lockless queues, one for each vertex. The compute function is a user defined function that is run in the context of each vertex during a pregel superstep. Update functions are called in parallel with a user defined number of threads.
 
 \section{Problem}
 \justify
