@@ -192,11 +192,11 @@ One of the main similar applications in this area is GraphLab. GraphLab is anoth
 
 \section{Implementation}
 \justify
-FemtoGraph is implemented in C++ using parts of the Boost C++ library. There are 3 main parts. Vertex storage, the messagequeue, and the compute function. Vertex storage also stores edges and uses  an adjacency list using C++ vectors. The messagequeue is implemented using boost lockless queues, one for each vertex. The compute function is a user defined function that is run in the context of each vertex during a pregel superstep. Update functions are called in parallel with a user defined number of threads. The messagequeue follows a producer-consumer model where the compute functions of the previous superstep generate messages that are consumed by the compute function of the current superstep.
+FemtoGraph is implemented in C++ using parts of the Boost C++ library. There are 3 main parts. Vertex storage, the message queue, and the compute function. Vertex storage also stores edges and uses  an adjacency list using C++ vectors. The message queue is implemented using boost lockless queues, one for each vertex. The compute function is a user defined function that is run in the context of each vertex during a pregel superstep. Update functions are called in parallel with a user defined number of threads. The message queue follows a producer-consumer model where the compute functions of the previous superstep generate messages that are consumed by the compute function of the current superstep.
 
 \section{Problem}
 \justify
-In the pregel model for graph processing, the main bottleneck encoutered when scaling to many cores is the messagequeue. The messagequeue and the vertex storage are the only two data structures accessed from multiple threads. Vertices are not modified enough to warrant anything more than simple mutex based locking. The messagequeue, however, is accessed at a very high rate from vertex compute functions from all threads. This can lead to race conditions, slowdowns, and deadlocks. A mutex based locking system resulted in an extreme slowdown to the point where the system scaled in reverse
+In the pregel model for graph processing, the main bottleneck encoutered when scaling to many cores is the message queue. The message queue and the vertex storage are the only two data structures accessed from multiple threads. Vertices are not modified enough to warrant anything more than simple mutex based locking. The message queue, however, is accessed at a very high rate from vertex compute functions from all threads. This can lead to race conditions, slowdowns, and deadlocks. A mutex based locking system resulted in an extreme slowdown to the point where the system scaled in reverse
 
 There was also a load balancing issue with ensuring that all supersteps completed at a similar time. FemtoGraph is synchronous, so if one thread runs longer than the others, the other threads have to block until the next superstep, effectively making the application singlethreaded for a single superstep.  
 
@@ -209,7 +209,7 @@ There was also a load balancing issue with ensuring that all supersteps complete
 
 \section{Solution}
 \justify
-My main solution for the messagequeue was to use a vector of boost lockfree queues for the messagequeue. The vector was used to presort messages by vertex in order to minimize compute time sorting message when they were received. Adding new vertices still requires a mutex, as the vector is not lockfree. This mutex is not a problem for the algorithms that I tested, as they spend most of their time updating current vertices. The lockfree queues minimize the total bottleneck in the messagequeue.
+My main solution for the message queue was to use a vector of boost lockfree queues for the message queue. The vector was used to presort messages by vertex in order to minimize compute time sorting message when they were received. Adding new vertices still requires a mutex, as the vector is not lockfree. This mutex is not a problem for the algorithms that I tested, as they spend most of their time updating current vertices. The lockfree queues minimize the total bottleneck in the message queue.
 
 Load balancing issues were solved partially by making sure that vertices were evenly divided between threads at thread start time. There was no easy way to migrate vertices between threads, but the performance loss of a single misplace vertex is trivial.  
 
