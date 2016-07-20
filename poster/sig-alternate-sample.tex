@@ -202,7 +202,9 @@ In the pregel model for graph processing, the main bottleneck encoutered when sc
 There was also a load balancing issue with ensuring that all supersteps completed at a similar time. FemtoGraph is synchronous, so if one thread runs longer than the others, the other threads have to block until the next superstep, effectively making the application singlethreaded for a single superstep.  
 
 \section{Solution}
-My main solution for the messagequeue was to use a vector of boost lockfree queues for the messagequeue. The vector was used to presort messages by vertex in order to minimize compute time sorting message when they were received. Adding new vertices still requires a mutex, as the vector is not lockfree. This mutex is not a problem for the algorithms that I tested, as they spend most of their time updating current vertices. The lockfree queues minimize the total bottleneck in the messagequeue
+My main solution for the messagequeue was to use a vector of boost lockfree queues for the messagequeue. The vector was used to presort messages by vertex in order to minimize compute time sorting message when they were received. Adding new vertices still requires a mutex, as the vector is not lockfree. This mutex is not a problem for the algorithms that I tested, as they spend most of their time updating current vertices. The lockfree queues minimize the total bottleneck in the messagequeue.
+
+Loadbalancing issues were solved partially by making sure that vertices were evenly divided between threads at thread start time. There was no easy way to migrate vertices between threads, but the performance loss of a single misplace vertex is trivial.  
 
 
 
