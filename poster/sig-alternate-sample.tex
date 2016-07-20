@@ -221,6 +221,7 @@ Loadbalancing issues were solved partially by making sure that vertices were eve
 
 
 \section{Results}
+We compared FemtoGraph and  GraphLab on running pagerank on a large Stanford SNAP graph. The graph used was the Wikipedia Talk Network, a directed graph based off of discussion about Wikipedia article edits with 2394385 Vertices and 5021410 edges. \cite{snapnets} The final version of FemtoGraph is capable of scaling to 48 cores on a single large system. At 28 cores, it begins to overtake graphlab in terms of runtime. In the case of both applications, only compute time was counted. reading in data and initializing graphs were outside of the measured data. 
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{vs.png}
