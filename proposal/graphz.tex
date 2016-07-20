@@ -45,8 +45,7 @@ GRAPH/Z was based off of a graph processing paradigm called Pregel. Pregel uses 
   \section{Evaluation}
   We will be using profiling tools such as valgrind and callgrind, along with basic runtime measurement, to measure the efficiency and speed of GRAPH/Z in relation to Graphlab. We will be using a modified pagerank algorithm defined as \\
   $\forall t \in P : r^{(t)}(t)  = (1-\alpha) \cdot r(t) + \alpha \sum_{(s,t) \in L} \frac{r^{(t-1)}(s)}{|L(s)|}$\\ 
-  While profiling at a function call level will help us achieve our goal, the metrics used to determine success will be overall runtime and memory use. Scaling will be determined on multiple cores, and increasing data size, but on a single node.  These metrics will be used for the eventual later goal of scaling to more than one node.
-\end{multicols}
+  While profiling at a function call level will help us achieve our goal, the metrics used to determine success will be overall runtime and memory use. Scaling will be determined on multiple cores, and increasing data size, but on a single node.  These metrics will be used for the eventual later goal of scaling to more than one node.\end{multicols}
 
   \section{Timeline}
   \includegraphics[width=\textwidth]{timeline.png}
