@@ -174,6 +174,7 @@
 \keywords{Graph processing; Parallel Algorithms; Shared Memory}
 
 \section{Introduction}
+Graph processing at a large scale has been a hot topic for research because of many industry application in social networks, advertising, computer network mapping, and other data mining and analytics applications. Some examples of graph processing systems or frameworks currently in use are Apache Giraph, GraphLab, and GraphX. Graph processing at a large scale is hard, in part because of the memory bandwidth requirements of moving the graph's state to the next iteration. \cite{Gz:7} To simplify graph processing algorithms, some models use a vertex-centric approach. This approach involves calling a function in the context of a vertex for each and every vertex. This function can modify or read from edges and other vertices.  Computation occurs in intervals or steps, with some form of communication between steps. Examples of vertex-centric systems include Giraph and GraphLab. \cite{Gz:6} Vertex-centric algorithms can be either synchronous, meaning every vertex function must finish before the next step begins, or asynchronous, which means that the next step can begin in the context of one vertex immediately.
 
 \section{Problem}
 
