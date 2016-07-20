@@ -184,6 +184,10 @@ To simplify graph processing algorithms, FemtoGraph will use a vertex-centric ap
 
 In particular, FemtoGraph is based off of the pregel model. Pregel is a vertex-centric graph processing model. Pregel is synchronous, with computation occurring in steps called supersteps. There is a messaging system for sending data and state to vertices in the next superstep, but not to any vertex in the current superstep. Vertices can do computations, modify neighbor vertices and edges, send messages to vertices in the next superstep, and vote to halt. A vertex that has voted to halt cannot run its compute function until it receives a message or all vertices have voted to halt. When all vertices have voted to halt, the simulation ends. \cite{Gz:4}
 
+\section{Related Work}
+One of the main similar applications in this area is GraphLab. GraphLab is another vertex-centric graph processing framework that can either run on a single node using shared memory, or as a distributed application. GraphLab is the simplest to compare to FemtoGraph as it can run with shared memory without the harsh overhead of frameworks like Hadoop or Spark. GraphLab is asynchronous, which gives it the edge of not having to wait for the fist superstep to complete before starting the next superstep. Graphlab was the main point of comparison of FemtoGraph 
+
+
 \section{Implementation}
 FemtoGraph is implemented in C++ using parts of the Boost C++ library. There are 3 main parts. Vertex storage, the messagequeue, and the compute function. Vertex storage also stores edges and uses  an adjacency list using C++ vectors. The messagequeue is implemented using boost lockless queues, one for each vertex. The compute function is a user defined function that is run in the context of each vertex during a pregel superstep. Update functions are called in parallel with a user defined number of threads. The messagequeue follows a producer-consumer model where the compute functions of the previous superstep generate messages that are consumed by the compute function of the current superstep.
 
@@ -196,10 +200,6 @@ In the pregel model for graph processing, the main bottleneck encoutered when sc
 \textit{[placeholder for chart]}
 
 There was also a load balancing issue with ensuring that all supersteps completed at a similar time. FemtoGraph is synchronous, so if one thread runs longer than the others, the other threads have to block until the next superstep, effectively making the application singlethreaded.  
-
-\section{Related Work}
-One of the main similar applications in this area is GraphLab. GraphLab is another vertex-centric graph processing framework that can either run on a single node using shared memory, or as a distributed application. GraphLab is the simplest to compare to FemtoGraph as it can run with shared memory without the harsh overhead of frameworks like Hadoop or Spark. GraphLab is asynchronous, which gives it the edge of not having to wait for the fist superstep to complete before starting the next superstep. 
-
 
 \section{Solution}
 My main solution for the messagequeue was to use a vector of boost lockfree queues for the messagequeue. The vector was used to presort messages by vertex in order to minimize compute time sorting message when they were received. Adding new vertices still requires a mutex, as the vector is not lockfree. This mutex is not a problem for the algorithms that I tested, as they spend most of their time updating current vertices. The lockfree queues minimize the total bottleneck in the messagequeue
