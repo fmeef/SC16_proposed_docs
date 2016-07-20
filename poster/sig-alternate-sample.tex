@@ -78,7 +78,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{Implimenting A Pregel Based Multithreaded Graph Processing Library}
+\title{FemtoGraph: A Pregel Based Multithreaded Graph Processing Library}
 \subtitle{[Extended Abstract]}
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -174,9 +174,14 @@
 \keywords{Graph processing; Parallel Algorithms; Shared Memory}
 
 \section{Introduction}
-Graph processing at a large scale has been a hot topic for research because of many industry application in social networks, advertising, computer network mapping, and other data mining and analytics applications. Some examples of graph processing systems or frameworks currently in use are Apache Giraph, GraphLab, and GraphX. Graph processing at a large scale is hard, in part because of the memory bandwidth requirements of moving the graph's state to the next iteration. \cite{Gz:7} To simplify graph processing algorithms, some models use a vertex-centric approach. This approach involves calling a function in the context of a vertex for each and every vertex. This function can modify or read from edges and other vertices.  Computation occurs in intervals or steps, with some form of communication between steps. Examples of vertex-centric systems include Giraph and GraphLab. \cite{Gz:6} Vertex-centric algorithms can be either synchronous, meaning every vertex function must finish before the next step begins, or asynchronous, which means that the next step can begin in the context of one vertex immediately.
+Graph processing at a large scale has been a hot topic for research because of many industry application in social networks, advertising, computer network mapping, and other data mining and analytics applications. Some examples of graph processing systems or frameworks currently in use are Apache Giraph, GraphLab, and GraphX. Graph processing at a large scale is hard, in part because of the memory bandwidth requirements of moving the graph's state to the next iteration. \cite{Gz:7} We aim to develop ,FemtoGraph, a graph processing framework capable of scaling to a large number of cores on a single node and running complex algorithms like pagerank.
+
+To simplify graph processing algorithms, FemtoGraph will use a vertex-centric approach. This approach involves calling a function in the context of a vertex for each and every vertex. This function can modify or read from edges and other vertices.  Computation occurs in intervals or steps, with some form of communication between steps. Examples of vertex-centric systems include Giraph and GraphLab. \cite{Gz:6} Vertex-centric algorithms can be either synchronous, meaning every vertex function must finish before the next step begins, or asynchronous, which means that the next step can begin in the context of one vertex immediately.
+
+In particular, FemtoGraph is based off of the pregel model. Pregel is a vertex-centric graph processing model. Pregel is synchronous, with computation occurring in steps called supersteps. There is a messaging system for sending data and state to vertices in the next superstep, but not to any vertex in the current superstep. Vertices can do computations, modify neighbor vertices and edges, send messages to vertices in the next superstep, and vote to halt. A vertex that has voted to halt cannot run its compute function until it receives a message or all vertices have voted to halt. When all vertices have voted to halt, the simulation ends. 
 
 \section{Problem}
+
 
 \section{Related Work}
 
