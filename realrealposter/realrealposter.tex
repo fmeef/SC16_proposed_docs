@@ -1,10 +1,17 @@
-\documentclass[35pt,landscape]{tikzposter}
+
+\documentclass[25pt, portrait,  margin=0mm, innermargin=15mm,
+  blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
 
 
 
 \usepackage[utf8]{inputenc}
 
 \usetheme{Basic}
+
+\makeatletter
+\setlength{\TP@visibletextwidth}{225cm}
+\setlength{ \TP@visibletextheight}{120cm}
+\makeatother
 
 \title{FemtoGraph: A Pregel Based Multithreaded
   Graph Processing Library}
@@ -17,8 +24,9 @@
   \textit{Illinois Institute of Technology}\\
   iraicu@cs.iit.edu\\
 }
-\geometry{paperwidth=243.84cm,paperheight=121.92cm}
 
+
+\geometry{paperwidth=243.84cm,paperheight=121.92cm}
 
 
 \begin{document}
@@ -26,13 +34,29 @@
 \maketitle
 
 \begin{columns}
-    \column{0.5}
+    \column{0.25}
     \block[roundedcorners=40]{Abstract} {
 
 
   The emerging applications for large graphs in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale accross large core counts and many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some smaller systems make use of shared memory (SMP) and larger core counts. I hope to explore ways to utilize these larger shared memory systems by implementing a framework for manipulating graphs at a large scale. This system should be able to leverage and scale to very large core counts and provide a framework for later incorporating distributed processing across multiple nodes.
 }
 
+
+    \block[roundedcorners=40]{Pregel Model} {
+      FemtoGraph is based off of the Pregel Model of graph processing
+
+      \begin{itemize}
+      \item Vertex-centric: \textit{think like a vertex}
+      \item Computation occurs in synchronous \textit{supersteps}
+      \item \textit{Compute function} called in parallel in the context of each vertex
+      \item All compute functions must be called before next superstep
+      \item Vertices can update edges and neighboring vertices
+      \item Vertices can send messages to vertices in the \textit{next} superstep only
+      \item Vertices can \textit{vote to halt}. Vertices un-halt upon receiving a message
+      \item When all vertices are halted, the simulation ends
+      \end{itemize}
+      
+      }
 
     \block[roundedcorners=40]{Implementation} {
 
@@ -44,7 +68,33 @@
       \end{itemize}
 
 
-     }
+    }
+    \column{0.25}
+    \block[roundedcorners=40]{Initial Problems} {
+      \textbf{Initial FemtoGraph could not scale past 4 cores}
+      \begin{itemize}
+      \item  Very bad scaling
+      \item Tried various graph storage techniques and threading patterns
+      \item Little improvement
+      \end{itemize}
+      \setcounter{figurecounter}{98}
+      \begin{tikzfigure}[Less than perfect scaling\label{test_lable}]
+        \includegraphics[width=0.65\linewidth]{before.png}
+      \end{tikzfigure}
+      \begin{itemize}
+      \item Initial message queue used global mutexes (not lockfree) 
+      \item Profiling using callgrind showed bottleneck in message queue
+      \end{itemize}
+      \setcounter{figurecounter}{98}
+      \begin{tikzfigure}[Callgrind profiling]
+        \includegraphics[width=0.85\linewidth]{callgrind.png}
+      \end{tikzfigure}
+      \begin{itemize}
+      \item Highlighted area shows message queue blocking until mutex is freed
+      \end{itemize}
+
+
+      }
     
     \block[roundedcorners=40]{Final Results} {
       \setcounter{figurecounter}{98}
