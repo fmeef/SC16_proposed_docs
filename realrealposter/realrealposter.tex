@@ -28,6 +28,9 @@
   \textbf{Ioan Raicu}\\
   \textit{Illinois Institute of Technology}\\
   iraicu@cs.iit.edu\\
+  \textbf{Benjamin Walters}\\
+  \textit{Illinois Institute of Technology}\\
+  bwalter4@hawk.iit.edu
 }
 
 \nocite{Gz:1}\nocite{Gz:2}
@@ -105,6 +108,18 @@
 
 
     }
+
+    
+    \block[roundedcorners=40]{Testing Conditions} {
+      All trials were done with
+      \begin{itemize}
+      \item The pagerank algorithm with epsilon 0.5 and damping factor 0.5
+      \item The Wikipedia Talk Network dataset from Stanford SNAP collection
+      \item A 2 socket 48 core AMD server with NUMA
+        
+      \end{itemize}
+    }
+
     \column{0.25}
     \block[roundedcorners=40]{Initial Problems} {
       \textbf{Initial FemtoGraph could not scale past 4 cores}
@@ -144,7 +159,7 @@
       \item FemtoGraph can be converted to distributed shared memory
         \begin{itemize}
         \item Use parallel structures like distributed hash tables for graph storage
-        \item use parallel message queue like RabitMQ for messagequeue
+        \item use parallel message queue like RabbitMQ for messagequeue
         \end{itemize}
       \end{itemize}
     }
@@ -191,19 +206,15 @@
       \end{itemize}
     }
 
-
-    \block[roundedcorners=40]{Testing Conditions} {
-      All trials were done with
-      \begin{itemize}
-      \item The pagerank algorithm with epsilon 0.5 and damping factor 0.5
-      \item The Wikipedia Talk Network dataset from Stanford SNAP collection
-      \item A 2 socket 48 core AMD server with NUMA
-        
-      \end{itemize}
-    }
     \block[roundedcorners=40]{Citations} {
   % sigproc.bib is the name of the Bibliography in t
       \printbibliography
+
+      \textbf{ACKNOWLEDGMENTS}\par
+        This work was supported in part by the National Science Foundation under awards NSF-1461260 (REU).
+
+
+        
     }
 
     
