@@ -6,9 +6,12 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
-
+\usepackage{biblatex}
 
 \usetheme{Basic}
+
+\bibliography{sigproc}
+
 
 \makeatletter
 \setlength{\TP@visibletextwidth}{225cm}
@@ -26,6 +29,15 @@
   \textit{Illinois Institute of Technology}\\
   iraicu@cs.iit.edu\\
 }
+
+\nocite{Gz:1}
+\nocite{Gz:2}
+\nocite{Gz:3}
+\nocite{Gz:4}
+\nocite{Gz:5}
+\nocite{Gz:6}
+\nocite{Gz:7}
+\nocite{snapnets}
 
 
 \geometry{paperwidth=243.84cm,paperheight=121.92cm}
@@ -177,6 +189,10 @@
       \item A 2 socket 48 core AMD server with NUMA
         
       \end{itemize}
+    }
+    \block[roundedcorners=40]{Citations} {
+  % sigproc.bib is the name of the Bibliography in t
+      \printbibliography
     }
 
     
