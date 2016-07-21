@@ -5,6 +5,8 @@
 
 
 \usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+
 
 \usetheme{Basic}
 
@@ -56,11 +58,18 @@
       We chose to use GraphLab as a reference point to judge application performance as it is designed to run in a shared memory configuration on a single node. 
       }
 
-    \block[roundedcorners=40]{Pregel Model} {
-      FemtoGraph is based off of the Pregel Model of graph processing
-
+    \block[roundedcorners=40]{Vertex-Centric Algorithms} {
+      FemtoGraph is based off of the Pregel Model of graph processing\\
+      \textbf{Vertex-centric algorithms:} \textit{think like a vertex}
       \begin{itemize}
-      \item Vertex-centric: \textit{think like a vertex}
+      \item Vertex-centric algorithms run within the context of a single vertex or groups of vertices
+      \item Computation occurs in steps
+      \item \textit{Synchronous} algorithms mandate each vertex must finish computation before executing the next step
+      \item \textit{Asynchronous} algorithms allow vertices to finish computation before the next step
+      \end{itemize}
+
+      \textbf{Pregel Model}
+      \begin{itemize}
       \item Computation occurs in synchronous \textit{supersteps}
       \item \textit{Compute function} called in parallel in the context of each vertex
       \item All compute functions must be called before next superstep
@@ -93,10 +102,6 @@
       \item Tried various graph storage techniques and threading patterns
       \item Little improvement
       \end{itemize}
-      \setcounter{figurecounter}{98}
-      \begin{tikzfigure}[Less than perfect scaling\label{test_lable}]
-        \includegraphics[width=0.65\linewidth]{before.png}
-      \end{tikzfigure}
       \begin{itemize}
       \item Initial message queue used global mutexes (not lockfree) 
       \item Profiling using callgrind showed bottleneck in message queue
@@ -108,7 +113,7 @@
       \begin{itemize}
       \item Highlighted area shows message queue blocking until mutex is freed
       \end{itemize}
-
+      
 
       }
     
@@ -119,7 +124,60 @@
         \end{tikzfigure}
 
 
-      }
+    }
+    \column{0.25}
+
+
+    \block[roundedcorners=40]{Solution} {
+      \begin{itemize}
+      \item Message queue has been confirmed to be the bottleneck
+      \item Global mutex is not fast enough for > 8 threads.
+      \item Local mutexes for areas of message queue too complex to implement
+      \item Eventually settled on Boost lockfree queue
+      \item Performance improved immediately
+      \item Can scale to 48 cores
+      \end{itemize}
+      \begin{tikzfigure}[Before lockfree queue\label{test_lable}]
+        \includegraphics[width=0.95\linewidth]{before.png}
+      \end{tikzfigure}
+            \begin{tikzfigure}[After lockfree queue\label{test_lable}]
+        \includegraphics[width=0.95\linewidth]{after.png}
+      \end{tikzfigure}
+
+
+    }
+
+    \column{0.25}
+
+    \block[roundedcorners=40]{GraphLab Comparison} {    
+      \begin{itemize}
+      \item Graphlab is efficient at low core counts
+      \item GraphLab does not scale very well, though, only dropping a few seconds in trials up to 48 cores.
+      \end{itemize}
+      \begin{tikzfigure}[Graphlab Scaling Performance\label{test_lable}]
+        \includegraphics[width=0.95\linewidth]{graphlab.png}
+      \end{tikzfigure}      
+    }
+
+    \block[roundedcorners=40]{Pagerank} {
+      Testing was done with the pagerank algorithm as a reference algorithm.
+      \begin{itemize}
+      \item  Pagerank is used in many real-wold machine learning and data analysis situations and algorithms.
+      \item Pagerank ranks vertices in a graph in order of relative connectedness
+      \item Defined by $\forall t \in P : r^{(t)}(t)  = (1-\alpha) \cdot r(t) + \alpha \sum_{(s,t) \in L} \frac{r^{(t-1)}(s)}{|L(s)|}$
+      \end{itemize}
+    }
+
+
+    \block[roundedcorners=40]{Testing Conditions} {
+      All trials were done with
+      \begin{itemize}
+      \item The pagerank algorithm with epsilon 0.5 and damping factor 0.5
+      \item The Wikipedia Talk Network dataset from Stanford SNAP collection
+      \item A 2 socket 48 core AMD server with NUMA
+        
+      \end{itemize}
+    }
 
     
 \end{columns}
