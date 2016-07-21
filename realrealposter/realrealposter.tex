@@ -42,6 +42,20 @@
 }
 
 
+    \block[roundedcorners=40]{Related Work} {
+      \textbf{Other Graph Processing Systems}\par
+      The field of graph processing is very well defined with many existing commercial and opensource applications and tools available.
+      \begin{itemize}
+      \item \textbf{GraphLab} Single node or parallel asynchronous vertex-centric framework 
+      \item \textbf{Hadoop} MapReduce based parallel framework using hdfs filesystem. While not designed for graph processing alone, a graph processing algorithm can be thought of as a series of chained MapReduce functions
+      \item \textbf{Apache Spark} MapReduce based parallel framework faster than Hadoop with in-memory processing 
+      \item \textbf{Apache Giraph} Application on top of Hadoop for dedicated graph processing
+      \end{itemize}
+
+      \textbf{Comparing Application Performance}\par
+      We chose to use GraphLab as a reference point to judge application performance as it is designed to run in a shared memory configuration on a single node. 
+      }
+
     \block[roundedcorners=40]{Pregel Model} {
       FemtoGraph is based off of the Pregel Model of graph processing
 
