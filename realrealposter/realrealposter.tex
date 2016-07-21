@@ -61,10 +61,12 @@
     \block[roundedcorners=40]{Implementation} {
 
       \begin{itemize}
-      \item Written in C++ with boost libraries
+      \item Written in C++ with Boost libraries
       \item Graph stored in adjacency list
-      \item Message queue based on multiple Boost lockfree queue
+      \item Message queue based on multiple Boost lockfree queues
       \item Uses normal std::thread for multithreading.
+      \item Compute function is a user defined function run in the context of each vertex
+      \item Compute functions are called in parallel
       \end{itemize}
 
 
