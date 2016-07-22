@@ -52,8 +52,7 @@
 \begin{columns}
     \column{0.25}
     \block[roundedcorners=40]{Abstract} {
-
-       The emerging applications for large graphs in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale accross large core counts and many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some smaller systems make use of shared memory (SMP) and larger core counts. We will explore ways to utilize these larger shared memory systems by implementing a framework for manipulating graphs at a large scale. This system leverages and scale to large core counts and provide a framework for later incorporating distributed processing across multiple nodes.
+      The emerging applications for large graphs in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale across large core counts and many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some smaller systems make use of shared memory (SMP) and larger core counts. We have implemented a graph processing framework for shared memory systems capable of scaling past 48 parallel cores.  This system leverages and scale to large core counts and provide a framework for later incorporating distributed processing across multiple nodes.
     }
 
 
@@ -83,6 +82,7 @@
 
       \textbf{Pregel Model}
       \begin{itemize}
+      \item A type of vertex-centric model
       \item Computation occurs in synchronous \textit{supersteps}
       \item \textit{Compute function} called in parallel in the context of each vertex
       \item All compute functions must be called before next superstep
