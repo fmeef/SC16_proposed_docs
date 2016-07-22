@@ -53,9 +53,8 @@
     \column{0.25}
     \block[roundedcorners=40]{Abstract} {
 
-
-  The emerging applications for large graphs in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale accross large core counts and many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some smaller systems make use of shared memory (SMP) and larger core counts. I hope to explore ways to utilize these larger shared memory systems by implementing a framework for manipulating graphs at a large scale. This system should be able to leverage and scale to very large core counts and provide a framework for later incorporating distributed processing across multiple nodes.
-}
+       The emerging applications for large graphs in big data science and social networks has led to the development of numerous parallel or distributed graph processing applications. The need for faster manipulation of graphs has driven the need to scale accross large core counts and many parallel machines. While distributed memory parallel systems continue to be used for high performance computing, some smaller systems make use of shared memory (SMP) and larger core counts. We will explore ways to utilize these larger shared memory systems by implementing a framework for manipulating graphs at a large scale. This system leverages and scale to large core counts and provide a framework for later incorporating distributed processing across multiple nodes.
+    }
 
 
     \block[roundedcorners=40]{Related Work} {
@@ -113,7 +112,7 @@
     \block[roundedcorners=40]{Testing Conditions} {
       All trials were done with
       \begin{itemize}
-      \item The pagerank algorithm with epsilon 0.5 and damping factor 0.5
+      \item The Pagerank algorithm with epsilon 0.5 and damping factor 0.5
       \item The Wikipedia Talk Network dataset from Stanford SNAP collection
       \item A 2 socket 48 core AMD server with NUMA
         
@@ -198,7 +197,7 @@
     }
 
     \block[roundedcorners=40]{Pagerank} {
-      Testing was done with the pagerank algorithm as a reference algorithm.
+      Testing was done with the Pagerank algorithm as a reference algorithm.
       \begin{itemize}
       \item  Pagerank is used in many real-wold machine learning and data analysis situations and algorithms.
       \item Pagerank ranks vertices in a graph in order of relative connectedness
